@@ -6,18 +6,16 @@
     "node": ">=14"
   },
   "config": {
-    "lambda": "arn:aws:lambda:us-east-1:999999999999:function:lambda-apig",
+    "lambda": "arn:aws:lambda:us-east-1:916321039000:function:lambda-apig",
     "log": "/aws/lambda/lambda-apig"
   },
   "scripts": {
     "test": "ts-node src/test",
     "log": "./scripts/log.sh $npm_package_config_log",
     "log-clear": "./scripts/log_clear.sh $npm_package_config_log",
-
     "clear": "rm -rf dist deploy.zip deploy",
     "validate": "tsc --noEmit",
     "build": "npm run clear && ts-node src/esbuild",
-    
     "unzip": "unzip deploy.zip -d deploy",
     "zip": "npm run build && ./scripts/zip.sh",
     "deploy": "npm run zip && ./scripts/deploy.sh $npm_package_config_lambda"
@@ -30,6 +28,6 @@
     "tsconfig-paths": "^3.10.1"
   },
   "dependencies": {
-    "@serverless-tools/aws": "file:../aws"
+    "@serverless-tools/aws": "^1.0.3"
   }
 }
