@@ -1,0 +1,35 @@
+{
+  "name": "lambda-apig-example",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=14"
+  },
+  "config": {
+    "lambda": "arn:aws:lambda:us-east-1:999999999999:function:lambda-apig",
+    "log": "/aws/lambda/lambda-apig"
+  },
+  "scripts": {
+    "test": "ts-node src/test",
+    "log": "./scripts/log.sh $npm_package_config_log",
+    "log-clear": "./scripts/log_clear.sh $npm_package_config_log",
+
+    "clear": "rm -rf dist deploy.zip deploy",
+    "validate": "tsc --noEmit",
+    "build": "npm run clear && ts-node src/esbuild",
+    
+    "unzip": "unzip deploy.zip -d deploy",
+    "zip": "npm run build && ./scripts/zip.sh",
+    "deploy": "npm run zip && ./scripts/deploy.sh $npm_package_config_lambda"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.78",
+    "@types/node": "^16.3.0",
+    "esbuild": "^0.12.15",
+    "ts-node": "^10.1.0",
+    "tsconfig-paths": "^3.10.1"
+  },
+  "dependencies": {
+    "@serverless-tools/aws": "file:../aws"
+  }
+}
