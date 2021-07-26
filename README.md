@@ -1,30 +1,28 @@
-# Typescript Lambda APIGateway Example
+# Typescript Lambda API Gateway Example
 
-# package.json configs
+# `How to deploy`
 
-- `config.lambda`
-- `config.log`
+1. Create the AWS Lambda Node 14.x function.
+2. Check your terminal AWS_PROFILE enviroment variable. The script uses `aws cli` to deploy (ensure that you have)
+3. Check Lambda ARN in `package.json` configs 
+4. > `npm run deploy`
 
-# package.json scripts
+# `npm run`
 
-### Local test and cloudwatch log (for remote test helper)
+#### Local test and cloudwatch log (for remote test helper)
 - `test`: local test (change payload event in `src/test.ts`)
 - `log`: realtime tail cloudwatch log
 
-### Clear, Validate and Build (a bundle /dist/index)
+#### Clear, Validate and Build (a bundle /dist/index)
 - `clear`: rm deploy.zip dist/ deploy/
 - `validate`: typescript validate
 - `build`: npm run clear && ts-node src/esbuild (ESBuild create bundled file /dits/index.js)
 
-### Zip and deploy
+#### Zip and deploy
 - `zip`: npm run build && ./scripts/zip.sh
 - `deploy`: npm run zip && ./scripts/deploy.sh $npm_package_config_lambda
 
-# scripts
-- `scripts/deploy.sh`
-- `scripts/log.sh`
-
-# index.handle
+# `index.handle`
 
 ```typescript
 import {Request as ApigRequest} from "@serverless-tools/aws/apigateway/Request";
